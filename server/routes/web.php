@@ -13,6 +13,24 @@
 |
 */
 
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+
+    //auth routes
+    $router->group(['prefix' => 'auth'], function () use ($router) {
+        $router->post('/', 'AuthController@register');
+    });
+
+    //post routes
+    $router->group(['prefix' => 'posts'], function () use ($router) {
+    $router->post('/', 'PostController@createPost');    
+    });
+
+ 
+
+});
+
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
