@@ -24,8 +24,8 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades();
-
 $app->withEloquent();
+
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +60,9 @@ $app->singleton(
 */
 
 $app->configure('app');
-
+$app->configure('jwt');
+$app->configure('auth');
+    
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -80,6 +82,8 @@ $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
 ]);
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -91,9 +95,10 @@ $app->routeMiddleware([
 |
 */
 
-$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-$app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);   
+$app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 
 /*
